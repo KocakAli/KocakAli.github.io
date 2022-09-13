@@ -22,21 +22,18 @@ const startGame = ()=>{
 const checkAnswer = (inp,btn,chance,rndmNumber)=>{
    btn.addEventListener('click', ()=>{
         const data = inp.value;
-
-        
-
-        if(chance == 10){
-            console.log('game over')}
+        const tb = document.querySelector('tbody');
+       
         if(data > 100 || data < 1){
             alert('number must be between 1 and 100');
             inp.textContent = "";
             focus(inp);
         }else if(data == rndmNumber){
-            const tb = document.querySelector('tbody');
+            
             const row = document.createElement('tr');
             const td1 = document.createElement('td');
             const td2 = document.createElement('td');
-
+            
 
             td1.textContent = data;
             td1.style.fontWeight = "bold";
@@ -55,11 +52,11 @@ const checkAnswer = (inp,btn,chance,rndmNumber)=>{
             tb.appendChild(row);
 
         }else{
-            const tb = document.querySelector('tbody');
             const row = document.createElement('tr');
             const td1 = document.createElement('td');
             const td2 = document.createElement('td');
 
+           ;
             td1.textContent = data;
             td1.style.fontWeight = "bold";
 
@@ -83,15 +80,27 @@ const checkAnswer = (inp,btn,chance,rndmNumber)=>{
             row.appendChild(td1);
             row.appendChild(td2);
             tb.appendChild(row);
-            console.log("check");
-            chance++;
+            
             inp.value = "";
             inp.focus();
+            chance++;
         }
+        if(chance == 11){
+            gameOver(inp,btn);
+        }
+       
     });
  
 }
 
+const gameOver = (inp,btn) =>{
+    const e = document.querySelector('tbody')
+    var child = e.lastElementChild; 
+    inp.disabled = true;
+    btn.disabled = true;
+}
     
+        
+
  
 
