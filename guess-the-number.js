@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded",()=>{ 
-   
+    
     startGame();
 
 });
@@ -51,6 +51,8 @@ const checkAnswer = (inp,btn,chance,rndmNumber)=>{
             row.appendChild(td2);
             tb.appendChild(row);
 
+            gameOver(inp,btn,chance);
+
         }else{
             const row = document.createElement('tr');
             const td1 = document.createElement('td');
@@ -86,20 +88,51 @@ const checkAnswer = (inp,btn,chance,rndmNumber)=>{
             chance++;
         }
         if(chance == 11){
-            gameOver(inp,btn);
+          
+            gameOver(inp,btn,chance);
+           
         }
        
     });
  
 }
 
-const gameOver = (inp,btn) =>{
-    const e = document.querySelector('tbody')
-    var child = e.lastElementChild; 
+const gameOver = (inp,btn,chance) =>{
     inp.disabled = true;
     btn.disabled = true;
-}
+
+    h3 = document.createElement("h3");
+    h3.style.fontWeight ="bold";
+    if(chance < 11){
+        h3.textContent = "!!!You found the correct answer!!!";
+        h3.style.color = "green";     
+    }else{
+        h3.textContent = "!!!GAME OVER!!!";
+        h3.style.color = "red";
+    }
+
+    body = document.querySelector("body");
+
+    con = document.createElement("div");
+    con.setAttribute("class", "d-flex align-items-center flex-column mt-3");
+
     
+    
+    btnn = document.createElement('button');
+    btnn.textContent = "Play Again";
+    btnn.setAttribute("class", "mt-2 btn btn-primary btn-sm");
+    con.appendChild(h3);
+    con.appendChild(btnn);
+    body.appendChild(con);
+
+    btnn.addEventListener("click", resetGame);
+
+}
+
+const resetGame = () =>{
+    
+   console.log("sa")
+}
         
 
  
